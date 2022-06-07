@@ -1,4 +1,4 @@
-package com.example.mobileclient.presintation
+package com.example.mobileclient.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
