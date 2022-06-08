@@ -6,9 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.example.mobileclient.Constants
 import com.example.mobileclient.R
-import com.example.mobileclient.data.storage.models.LoginStep1Model
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import com.example.mobileclient.data.storage.models.LoginStep2Model
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -35,6 +33,14 @@ class MainActivity : AppCompatActivity() {
         ) { _, bundle ->
             val number = bundle.getString(Constants.NUMBER_PHONE)
             showFragmentConfirmationPhone(number!!)
+        }
+
+        supportFragmentManager.setFragmentResultListener(
+            Constants.FRAGMENT_CONFIRMATION,
+            this
+        ) { _, bundle ->
+            val modelResult: LoginStep2Model = bundle.get(Constants.LOGIN_STEP_2_MODEL) as LoginStep2Model
+//            showFragmentConfirmationPhone(number!!)
         }
     }
 
@@ -71,7 +77,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initToolBar() {
         mActionBarToolbar?.setNavigationIcon(R.drawable.ic_baseline_close_24)
-//        mActionBarToolbar?.overflowIcon = ContextCompat.getDrawable(this, R.drawable.ic_baseline_close_24)
+//        mActionBarToolbar?.overflowIcon = ContextCompat.getDrawable(this, R.drawable.ic_baseline_close_24) //FIXME оставил код, на случай если понадобится
         setSupportActionBar(mActionBarToolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 //        supportActionBar?.setDisplayHomeAsUpEnabled(true)

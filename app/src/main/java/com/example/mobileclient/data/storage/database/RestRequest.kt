@@ -1,5 +1,9 @@
 package com.example.mobileclient.data.storage.database
 
+import com.example.mobileclient.data.storage.models.LoginStep2Model
+
+
 interface RestRequest {
-    fun loginPhone(numberPhone: String): String
+    fun loginPhoneStap1(numberPhone: String): String
+    fun confirmCode(numberPhone: String, code: String): LoginStep2Model
 }

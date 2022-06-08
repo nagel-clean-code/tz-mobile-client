@@ -27,7 +27,7 @@ class AuthorizationFragment : BaseFragment() {
             ViewModelProvider(
                 it,
                 ModelFactory()
-            ).get(AuthorizationViewModel::class.java)
+            )[AuthorizationViewModel::class.java]
         }!!
     }
 
@@ -54,16 +54,16 @@ class AuthorizationFragment : BaseFragment() {
                 root = binding.root,
                 result = result,
                 onSuccessResult = {
-                    binding.progressBar?.visibility = View.GONE
-                    binding.textError?.visibility = View.GONE
+                    binding.progressBar.visibility = View.GONE
+                    binding.textError.visibility = View.GONE
                 },
                 onPending = {
-                    binding.progressBar?.visibility = View.VISIBLE
-                    binding.textError?.visibility = View.GONE
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.textError.visibility = View.GONE
                 },
                 onError = {
-                    binding.progressBar?.visibility = View.GONE
-                    binding.textError?.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.GONE
+                    binding.textError.visibility = View.VISIBLE
                 }
             )
         }
