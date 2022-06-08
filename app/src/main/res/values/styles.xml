@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="roundedBottomNext">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">18dp</item>
+    </style>
+
+    <style name="MyStyle.ButtonMain">
+        <item name="android:background">@drawable/button_main</item>
+    </style>
+
+    <style name="MyStyle">my_style</style>
+</resources>

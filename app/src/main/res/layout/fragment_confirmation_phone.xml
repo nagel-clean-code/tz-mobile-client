@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.AuthorizationFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".presentation.ConfirmationPhoneFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
 
@@ -15,33 +15,25 @@
             android:id="@+id/enter"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/enter"
+            android:text="@string/phone_confirmation"
+            app:layout_constrainedHeight="true"
+            app:layout_constrainedWidth="true"
             android:textSize="35sp"
             android:textStyle="bold"
             app:layout_constraintLeft_toRightOf="@+id/guidelineLeft"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/text_1"
+            android:id="@+id/text_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/authorization_text_1"
-            android:textSize="20sp"
+            android:text="@string/confirmation_phone_text_1"
+            android:textSize="17sp"
             app:layout_constrainedHeight="true"
             app:layout_constrainedWidth="true"
             app:layout_constraintLeft_toRightOf="@+id/guidelineLeft"
             app:layout_constraintRight_toLeftOf="@id/guidelineRight"
             app:layout_constraintTop_toBottomOf="@id/enter" />
-
-        <TextView
-            android:id="@+id/text_2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20sp"
-            android:text="@string/authorization_text_2"
-            android:textSize="17sp"
-            app:layout_constraintLeft_toRightOf="@+id/guidelineLeft"
-            app:layout_constraintTop_toBottomOf="@id/text_1" />
 
         <LinearLayout
             android:id="@+id/linerLay"
@@ -55,24 +47,11 @@
                 android:id="@+id/input_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/number_phone"
-                android:inputType="number|phone"
+                android:hint="@string/code_stars"
+                android:inputType="numberPassword"
                 android:selectAllOnFocus="true"
                 android:stretchColumns="1" />
         </LinearLayout>
-
-        <Button
-            android:id="@+id/button"
-            style="@style/MyStyle.ButtonMain"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="20sp"
-            android:text="@string/further"
-            android:textAllCaps="false"
-            android:textSize="17sp"
-            app:layout_constraintEnd_toStartOf="@id/guidelineRight"
-            app:layout_constraintStart_toStartOf="@id/guidelineLeft"
-            app:layout_constraintTop_toBottomOf="@id/linerLay" />
 
         <TextView
             android:id="@+id/text_3"
@@ -80,13 +59,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20sp"
             android:lineSpacingExtra="3dp"
-            android:text="@string/user_agreement"
+            android:text="@string/confirmation_phone_text_2"
+            android:textColor="@color/purple_700"
             android:textSize="17sp"
             app:layout_constrainedHeight="true"
             app:layout_constrainedWidth="true"
             app:layout_constraintLeft_toRightOf="@+id/guidelineLeft"
             app:layout_constraintRight_toLeftOf="@id/guidelineRight"
-            app:layout_constraintTop_toBottomOf="@+id/button" />
+            app:layout_constraintTop_toBottomOf="@+id/linerLay" />
 
 
         <androidx.constraintlayout.widget.Guideline

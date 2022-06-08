@@ -3,12 +3,24 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/drawable/button_main.xml" value="0.158" />
+        <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.116" />
+        <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/drawable/roundedbutton.xml" value="0.158" />
+        <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout-land/fragment_authorization.xml" value="0.13198573127229488" />
+        <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout-large/fragment_authorization.xml" value="0.18" />
+        <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout-v28/fragment_authorization.xml" value="0.209375" />
+        <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout/activity_entrance.xml" value="0.209375" />
         <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout/activity_main.xml" value="0.1953125" />
-        <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout/fragment_authorization.xml" value="0.209375" />
+        <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout/fragment_authorization.xml" value="0.22" />
+        <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout/fragment_confirmation_phone.xml" value="0.22" />
+        <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout/fragment_login.xml" value="0.25" />
+        <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout/toolbar_actionbar.xml" value="0.209375" />
+        <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/menu/action_close.xml" value="0.209375" />
+        <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

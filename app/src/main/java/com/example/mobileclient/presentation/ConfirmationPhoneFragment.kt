@@ -4,51 +4,45 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.mobileclient.Constants.Companion.FRAGMENT_AUTHORIZATION
+import com.example.mobileclient.R
 import com.example.mobileclient.Constants.Companion.NUMBER_PHONE
-import com.example.mobileclient.databinding.FragmentAuthorizationBinding
-import com.example.mobileclient.presentation.viewmodels.AuthorizationViewModel
+import com.example.mobileclient.databinding.FragmentConfirmationPhoneBinding
 import com.example.mobileclient.presentation.viewmodels.ConfirmationPhoneViewModel
 import com.example.mobileclient.presentation.viewmodels.ModelFactory
 
-
-class AuthorizationFragment : Fragment() {
-
-    private lateinit var binding: FragmentAuthorizationBinding
+class ConfirmationPhoneFragment : Fragment() {
+    private lateinit var binding: FragmentConfirmationPhoneBinding
     private val viewModel = activity?.let {
         ViewModelProvider(
             it,
             ModelFactory()
-        ).get(AuthorizationViewModel::class.java)
+        ).get(ConfirmationPhoneViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = FragmentAuthorizationBinding.inflate(layoutInflater)
+        binding = FragmentConfirmationPhoneBinding.inflate(layoutInflater)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding.button.setOnClickListener {
-            parentFragmentManager.popBackStack()
-            parentFragmentManager.setFragmentResult(
-                FRAGMENT_AUTHORIZATION,
-                bundleOf(NUMBER_PHONE to binding.inputNumber.text.toString())
-            )
-        }
+        binding.text2.text = getString(
+            R.string.confirmation_phone_text_1,
+            arguments?.getString(NUMBER_PHONE)
+        )
         return binding.root
     }
 
     companion object {
-        fun getNewInstance(): AuthorizationFragment {
-            return AuthorizationFragment()
+        fun getNewInstance(numberPhone: String) = ConfirmationPhoneFragment().apply {
+            arguments = Bundle().apply {
+                putString(NUMBER_PHONE, numberPhone)
+            }
         }
     }
-
 
 }
