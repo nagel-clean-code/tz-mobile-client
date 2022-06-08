@@ -12,4 +12,5 @@
     <string name="confirmation_phone_text_1">Введите код из СМС отправленного на номер %s</string>
     <string name="code_stars">****</string>
     <string name="confirmation_phone_text_2">Отправить код ещё раз</string>
+    <string name="error">Ошибка, возможно проблема частых запросов </string>
 </resources>

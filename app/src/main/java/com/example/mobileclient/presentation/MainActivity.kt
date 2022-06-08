@@ -6,7 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.example.mobileclient.Constants
 import com.example.mobileclient.R
-
+import com.example.mobileclient.data.storage.models.LoginStep1Model
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private var mActionBarToolbar: Toolbar? = null
@@ -14,7 +17,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
     }
 
     override fun setContentView(layoutResID: Int) {
@@ -38,7 +40,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun showFragmentConfirmationPhone(numberPhone: String) {
         mActionBarToolbar?.navigationIcon = null
-//        mActionBarToolbar?.overflowIcon = ContextCompat.getDrawable(this, R.drawable.ic_baseline_close_24)
         setSupportActionBar(mActionBarToolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

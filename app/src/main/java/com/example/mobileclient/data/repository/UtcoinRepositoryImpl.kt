@@ -1,7 +1,11 @@
 package com.example.mobileclient.data.repository
 
+import com.example.mobileclient.data.storage.database.RestRequest
 import com.example.mobileclient.domain.repository.UtcoinRepository
 
-class UtcoinRepositoryImpl: UtcoinRepository {
+class UtcoinRepositoryImpl(private val restRequest: RestRequest): UtcoinRepository {
+
+    override fun loginPhone(numberPhone: String): String = restRequest.loginPhone(numberPhone)
+
 
 }
