@@ -6,15 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.mobileclient.Constants
 import com.example.mobileclient.Constants.Companion.LOGIN_STEP_2_MODEL
-import com.example.mobileclient.R
 import com.example.mobileclient.Constants.Companion.NUMBER_PHONE
+import com.example.mobileclient.R
 import com.example.mobileclient.databinding.FragmentConfirmationPhoneBinding
-import com.example.mobileclient.presentation.models.state.takeSuccess
-import com.example.mobileclient.presentation.viewmodels.AuthorizationViewModel
 import com.example.mobileclient.presentation.viewmodels.ConfirmationPhoneViewModel
 import com.example.mobileclient.presentation.viewmodels.ModelFactory
 
@@ -47,18 +44,19 @@ class ConfirmationPhoneFragment : BaseFragment() {
         return binding.root
     }
 
-    private fun retryListeners(){
-        binding.text3.setOnClickListener{
+    private fun retryListeners() {
+        binding.text3.setOnClickListener {
             viewModel.retry(numberPhone)
         }
 
-        viewModel.retryResult.observe(viewLifecycleOwner){
+        viewModel.retryResult.observe(viewLifecycleOwner) {
             if (it.isNotBlank())
-                binding.textError.text = it //TODO желательно сделать счётчик на 4 секунды для скрытия
+                binding.textError.text =
+                    it //TODO желательно сделать счётчик на 4 секунды для скрытия
         }
     }
 
-    private fun setupListenerResult(){
+    private fun setupListenerResult() {
         viewModel.loadResultLiveData.observe(viewLifecycleOwner) { result ->
             renderResult(
                 root = binding.root,
@@ -74,14 +72,14 @@ class ConfirmationPhoneFragment : BaseFragment() {
                 },
                 onError = {
                     binding.progressBar.visibility = View.GONE
-                    binding.textError.text = getString(R.string.invalid_code)
+                    binding.textError.text = it.localizedMessage
                     binding.textError.visibility = View.VISIBLE
                 }
             )
         }
     }
 
-    private fun returnResult(){
+    private fun returnResult() {
         parentFragmentManager.popBackStack()
         parentFragmentManager.setFragmentResult(
             Constants.FRAGMENT_CONFIRMATION,
@@ -89,17 +87,17 @@ class ConfirmationPhoneFragment : BaseFragment() {
         )
     }
 
-    private fun autoInputNumberPhone(){
+    private fun autoInputNumberPhone() {
         binding.text2.text = getString(
             R.string.confirmation_phone_text_1,
             numberPhone
         )
     }
 
-    private fun processingInputCode(){
+    private fun processingInputCode() {
         binding.inputNumber.addTextChangedListener {
-            if(it?.length == 4){
-              viewModel.sending(numberPhone, it.toString())
+            if (it?.length == 4) {
+                viewModel.sending(numberPhone, it.toString())
             }
         }
     }

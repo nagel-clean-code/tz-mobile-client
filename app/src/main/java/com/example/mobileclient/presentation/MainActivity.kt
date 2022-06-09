@@ -6,8 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.example.mobileclient.Constants
 import com.example.mobileclient.R
+import com.example.mobileclient.data.storage.models.LoginStep1Model
 import com.example.mobileclient.data.storage.models.LoginStep2Model
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private var mActionBarToolbar: Toolbar? = null
@@ -31,8 +31,8 @@ class MainActivity : AppCompatActivity() {
             Constants.FRAGMENT_AUTHORIZATION,
             this
         ) { _, bundle ->
-            val number = bundle.getString(Constants.NUMBER_PHONE)
-            showFragmentConfirmationPhone(number!!)
+            val number: LoginStep1Model = bundle.get(Constants.LOGIN_STEP_1_MODEL) as LoginStep1Model
+            showFragmentConfirmationPhone(number.normalizedPhone!!)
         }
 
         supportFragmentManager.setFragmentResultListener(

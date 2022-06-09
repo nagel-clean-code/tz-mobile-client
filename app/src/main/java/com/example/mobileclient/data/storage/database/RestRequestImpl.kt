@@ -15,50 +15,44 @@ import java.util.concurrent.CountDownLatch
 class RestRequestImpl : RestRequest {
     private val okHttpClient = OkHttpClient()
 
-    override fun loginPhoneStap1(numberPhone: String): String {
-        var resultNumber: String = ""
+    override fun loginPhoneStep1(numberPhone: String): LoginStep1Model {
+        var result = LoginStep1Model()
         val url = Constants.LINK_LOGIN_STEP_1_API.format(numberPhone)
         val countDownLatch = CountDownLatch(1)
         GET(url, object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 Log.w(ContentValues.TAG, e)
+                result.errorMessage = "Ошибка запроса"
                 countDownLatch.countDown()
-                throw Exception("Ошибка запроса")
             }
 
             override fun onResponse(call: Call, response: Response) {
                 val respString: String? = response.body?.string()
                 Log.d(ContentValues.TAG, "Запрос выполнен успешно: $respString")
 
-                val result: LoginStep1Model?
                 try {
                     val type = object : TypeToken<LoginStep1Model>() {}.type
                     result = Gson().fromJson(respString, type)!!
                 } catch (e: Exception) {
                     Log.w(ContentValues.TAG, e)
-                    throw IllegalStateException("Неудалось распарсить ответ")
+                    result.errorMessage = "Неудалось распарсить ответ"
                 }
-                if (result.successful) {
-                    resultNumber = result.normalizedPhone
-                    countDownLatch.countDown()
-                } else {
-                    throw IllegalArgumentException("Ошибочный ответ на запрос")
-                }
+                countDownLatch.countDown()
             }
         })
         countDownLatch.await()
-        return resultNumber
+        return result
     }
 
     override fun confirmCode(numberPhone: String, code: String): LoginStep2Model {
-        var resultConfirm: LoginStep2Model? = null
-        val url = Constants.LINK_LOGIN_STEP_2_API.format(numberPhone,code)
+        var resultConfirm = LoginStep2Model()
+        val url = Constants.LINK_LOGIN_STEP_2_API.format(numberPhone, code)
         val countDownLatch = CountDownLatch(1)
         GET(url, object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 Log.w(ContentValues.TAG, e)
+                resultConfirm.errorMessage = "Ошибка запроса"
                 countDownLatch.countDown()
-                throw Exception("Ошибка запроса")
             }
 
             override fun onResponse(call: Call, response: Response) {
@@ -69,17 +63,13 @@ class RestRequestImpl : RestRequest {
                     resultConfirm = Gson().fromJson(respString, type)!!
                 } catch (e: Exception) {
                     Log.w(ContentValues.TAG, e)
-                    throw IllegalStateException("Неудалось распарсить ответ")
+                    resultConfirm.errorMessage = "Неудалось распарсить ответ"
                 }
-                if (resultConfirm!!.successful) {
-                    countDownLatch.countDown()
-                } else {
-                    throw IllegalArgumentException("Ошибочный ответ на запрос")
-                }
+                countDownLatch.countDown()
             }
         })
         countDownLatch.await()
-        return resultConfirm!!
+        return resultConfirm
     }
 
     fun GET(url: String, callback: Callback): Call {

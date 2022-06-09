@@ -4,8 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import com.example.mobileclient.data.storage.models.LoginStep2Model
 import com.example.mobileclient.domain.usecase.ConfirmCodeUseCase
 import com.example.mobileclient.domain.usecase.LoginPhoneUseCase
-import com.example.mobileclient.presentation.models.state.SuccessResult
-import java.lang.Exception
 
 class ConfirmationPhoneViewModel(
     private val confirmCodeUseCase: ConfirmCodeUseCase,
@@ -28,6 +26,11 @@ class ConfirmationPhoneViewModel(
     }
 
     fun sending(number: String, code: String) = into(_loadResultMutableLiveData) {
-        confirmCodeUseCase.execute(number, code)
+        val result = confirmCodeUseCase.execute(number, code)
+        if(result.errorMessage?.isBlank() == true){
+            return@into result
+        }else {
+            throw Exception(result.errorMessage)
+        }
     }
 }

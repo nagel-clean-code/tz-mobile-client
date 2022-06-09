@@ -19,7 +19,7 @@ open class BaseViewModel: ViewModel() {
         liveResult.value = PendingResult()
         try {
             liveResult.value = SuccessResult(block())
-        } catch (e: Exception) {
+        } catch (e: Exception ) {
             liveResult.value = ErrorResult(e)
         }
     }

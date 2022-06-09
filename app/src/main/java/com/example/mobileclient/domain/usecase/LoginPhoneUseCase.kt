@@ -1,5 +1,6 @@
 package com.example.mobileclient.domain.usecase
 
+import com.example.mobileclient.data.storage.models.LoginStep1Model
 import com.example.mobileclient.domain.repository.UtcoinRepository
 
 /**
@@ -7,6 +8,6 @@ import com.example.mobileclient.domain.repository.UtcoinRepository
  * @return номер телефона в правильном формате
  */
 class LoginPhoneUseCase(private val repository: UtcoinRepository) {
-    fun execute(numberPhone: String): String = repository.loginPhone(numberPhone)
+    fun execute(numberPhone: String): LoginStep1Model = repository.loginPhone(numberPhone)
 
 }

@@ -1,17 +1,22 @@
 package com.example.mobileclient.presentation.viewmodels
 
+import com.example.mobileclient.data.storage.models.LoginStep1Model
 import com.example.mobileclient.domain.usecase.LoginPhoneUseCase
-import com.example.mobileclient.presentation.models.state.SuccessResult
 
 class AuthorizationViewModel(
     private val loginPhoneUseCase: LoginPhoneUseCase
 ): BaseViewModel() {
 
-    private val _loadResultMutableLiveData = MutableLiveResult<String>(SuccessResult(String()))
-    val loadResultLiveData: LiveResult<String> = _loadResultMutableLiveData
+    private val _loadResultMutableLiveData = MutableLiveResult<LoginStep1Model>()
+    val loadResultLiveData: LiveResult<LoginStep1Model> = _loadResultMutableLiveData
 
 
     fun sendCode(number: String) = into(_loadResultMutableLiveData) {
-        loginPhoneUseCase.execute(number)
+        val result = loginPhoneUseCase.execute(number)
+        if(result.errorMessage?.isBlank() == true){
+            return@into result
+        }else {
+            throw Exception(result.errorMessage)
+        }
     }
 }

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import com.example.mobileclient.Constants.Companion.FRAGMENT_AUTHORIZATION
-import com.example.mobileclient.Constants.Companion.NUMBER_PHONE
+import com.example.mobileclient.Constants.Companion.LOGIN_STEP_1_MODEL
 import com.example.mobileclient.databinding.FragmentAuthorizationBinding
 import com.example.mobileclient.presentation.models.state.SuccessResult
 import com.example.mobileclient.presentation.models.state.takeSuccess
@@ -63,6 +63,7 @@ class AuthorizationFragment : BaseFragment() {
                 },
                 onError = {
                     binding.progressBar.visibility = View.GONE
+                    binding.textError.text = it.localizedMessage
                     binding.textError.visibility = View.VISIBLE
                 }
             )
@@ -73,7 +74,7 @@ class AuthorizationFragment : BaseFragment() {
         parentFragmentManager.popBackStack()
         parentFragmentManager.setFragmentResult(
             FRAGMENT_AUTHORIZATION,
-            bundleOf(NUMBER_PHONE to viewModel.loadResultLiveData.value?.takeSuccess())
+            bundleOf(LOGIN_STEP_1_MODEL to viewModel.loadResultLiveData.value?.takeSuccess())
         )
     }
 
