@@ -83,6 +83,4 @@ class AuthorizationFragment : BaseFragment() {
             return AuthorizationFragment()
         }
     }
-
-
 }

@@ -6,6 +6,7 @@ import com.example.mobileclient.data.repository.UtcoinRepositoryImpl
 import com.example.mobileclient.data.storage.database.RestRequestImpl
 import com.example.mobileclient.domain.usecase.ConfirmCodeUseCase
 import com.example.mobileclient.domain.usecase.LoginPhoneUseCase
+import com.example.mobileclient.domain.usecase.SearchByStringUseCase
 
 
 class ModelFactory() : ViewModelProvider.NewInstanceFactory() {
@@ -22,6 +23,10 @@ class ModelFactory() : ViewModelProvider.NewInstanceFactory() {
         ConfirmCodeUseCase(utcoinRepository)
     }
 
+    private val searchByStringUseCase by lazy(LazyThreadSafetyMode.NONE) {
+        SearchByStringUseCase(utcoinRepository)
+    }
+
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when (modelClass) {
             ConfirmationPhoneViewModel::class.java -> ConfirmationPhoneViewModel(
@@ -29,6 +34,8 @@ class ModelFactory() : ViewModelProvider.NewInstanceFactory() {
                 loginPhoneUseCase
             ) as T
             AuthorizationViewModel::class.java -> AuthorizationViewModel(loginPhoneUseCase) as T
+            SearchResultViewModel::class.java -> SearchResultViewModel(searchByStringUseCase) as T
+            InformationAboutElementViewModel::class.java -> InformationAboutElementViewModel() as T
             else -> {
                 throw IllegalArgumentException("Не верный тип ViewModel")
             }

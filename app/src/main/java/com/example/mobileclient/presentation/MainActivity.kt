@@ -23,7 +23,8 @@ class MainActivity : AppCompatActivity() {
         initToolBar()
 
         setupListenerResult()
-        showFragmentLogin()
+        //showFragmentLogin() //FIXME пока тестю работу с поиском, потом восстановить
+        showFragmentSearch(LoginStep2Model())
     }
 
     private fun setupListenerResult() {
@@ -42,6 +43,13 @@ class MainActivity : AppCompatActivity() {
             val modelResult: LoginStep2Model = bundle.get(Constants.LOGIN_STEP_2_MODEL) as LoginStep2Model
 //            showFragmentConfirmationPhone(number!!)
         }
+    }
+
+    private fun showFragmentSearch(loginStep2Model: LoginStep2Model) {
+        supportFragmentManager
+            .beginTransaction()
+            .addToBackStack(null)
+            .replace(R.id.fragment_container, SearchResultFragment.getNewInstance(loginStep2Model)).commit()
     }
 
     private fun showFragmentConfirmationPhone(numberPhone: String) {

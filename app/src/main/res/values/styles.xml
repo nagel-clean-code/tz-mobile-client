@@ -9,5 +9,9 @@
         <item name="android:background">@drawable/button_main</item>
     </style>
 
+    <style name="MyStyle.ButtonMainBlue">
+        <item name="android:background">@drawable/buy_with_cashback</item>
+    </style>
+
     <style name="MyStyle">my_style</style>
 </resources>

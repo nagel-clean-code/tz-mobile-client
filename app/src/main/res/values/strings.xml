@@ -14,4 +14,5 @@
     <string name="confirmation_phone_text_2">Отправить код ещё раз</string>
     <string name="error">Ошибка, возможно проблема частых запросов </string>
     <string name="invalid_code">Неверный код подтверждения</string>
+    <string name="expand">Развернуть</string>
 </resources>
