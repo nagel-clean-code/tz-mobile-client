@@ -15,4 +15,5 @@
     <string name="error">Ошибка, возможно проблема частых запросов </string>
     <string name="invalid_code">Неверный код подтверждения</string>
     <string name="expand">Развернуть</string>
+    <string name="by_with_cashback">Купить с кешбэком</string>
 </resources>

@@ -154,6 +154,7 @@
             android:id="@+id/expandButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:background="?android:attr/selectableItemBackground"
             android:drawableStart="@drawable/ic_baseline_keyboard_arrow_down_24"
             android:text="@string/expand"
@@ -176,18 +177,20 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.94" />
+
         <Button
             android:id="@+id/button"
             style="@style/MyStyle.ButtonMainBlue"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15sp"
-            android:text="@string/further"
+            android:text="@string/by_with_cashback"
             android:textAllCaps="false"
+            android:textColor="@color/white"
             android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/guideline2"
-            app:layout_constraintStart_toStartOf="@id/guideline1"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintStart_toStartOf="@id/guideline1" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
