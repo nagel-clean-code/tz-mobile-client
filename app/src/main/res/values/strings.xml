@@ -16,4 +16,6 @@
     <string name="invalid_code">Неверный код подтверждения</string>
     <string name="expand">Развернуть</string>
     <string name="by_with_cashback">Купить с кешбэком</string>
+    <string name="search_stores_products">Поиск магазинов, товаров</string>
+    <string name="problems_with_Internet">Проблемы с интернетом, повторите попытку позже</string>
 </resources>

@@ -1,19 +1,22 @@
 package com.example.mobileclient.presentation
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mobileclient.Constants.Companion.LOGIN_STEP_2_MODEL
 import com.example.mobileclient.data.storage.models.LoginStep2Model
+import com.example.mobileclient.data.storage.models.ResponseSearch
 import com.example.mobileclient.databinding.FragmentSearchResultBinding
-import com.example.mobileclient.presentation.adapters.recycleview.SearchResultAdapter
+import com.example.mobileclient.presentation.adapters.SearchResultAdapter
+import com.example.mobileclient.presentation.models.state.takeSuccess
 import com.example.mobileclient.presentation.viewmodels.ModelFactory
 import com.example.mobileclient.presentation.viewmodels.SearchResultViewModel
 
-class SearchResultFragment : Fragment() {
+class SearchResultFragment : BaseFragment() {
 
     private lateinit var binding: FragmentSearchResultBinding
     private lateinit var viewModel: SearchResultViewModel
@@ -29,23 +32,63 @@ class SearchResultFragment : Fragment() {
                 ModelFactory()
             )[SearchResultViewModel::class.java]
         }!!
-        startInit()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        resultAuthorization =  arguments?.get(LOGIN_STEP_2_MODEL) as LoginStep2Model
+        resultAuthorization = arguments?.get(LOGIN_STEP_2_MODEL) as LoginStep2Model
+        textEditListenerFormSearch()
+        setupListenerResult()
         return binding.root
     }
 
-    private fun startInit(){
-        searchAdapter = SearchResultAdapter()
+    private fun setupListenerResult() {
+        viewModel.loadResultLiveData.observe(viewLifecycleOwner) { result ->
+            renderResult(
+                root = binding.root,
+                result = result,
+                onSuccessResult = {
+                    binding.progressBar.visibility = View.GONE
+                    binding.textError.visibility = View.GONE
+                    showResult()
+                },
+                onPending = {
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.textError.visibility = View.GONE
+                },
+                onError = {
+                    binding.progressBar.visibility = View.GONE
+                    binding.textError.text = it.localizedMessage
+                    binding.textError.visibility = View.VISIBLE
+                }
+            )
+        }
+    }
+
+    private fun showResult() {
+        binding.searchTextInputLayout.visibility = View.GONE
+        binding.recyclerView.visibility = View.VISIBLE
+        val result = viewModel.loadResultLiveData.value?.takeSuccess() as ResponseSearch
+        binding.recyclerView.layoutManager = LinearLayoutManager(context)
+        searchAdapter = SearchResultAdapter(result.campaigns, result.products)
+        binding.recyclerView.adapter = searchAdapter
+    }
+
+    private fun textEditListenerFormSearch() {
+        binding.searchEditText.setOnEditorActionListener { _, _, keyEvent ->
+            if (keyEvent == null || (keyEvent.action == KeyEvent.ACTION_DOWN)) {
+                viewModel.searchByString(binding.searchEditText.text.toString())
+                return@setOnEditorActionListener false
+            } else {
+                return@setOnEditorActionListener true
+            }
+        }
     }
 
     companion object {
-        fun getNewInstance(modelResult: LoginStep2Model) = SearchResultFragment().apply{
+        fun getNewInstance(modelResult: LoginStep2Model) = SearchResultFragment().apply {
             arguments = Bundle().apply {
                 putParcelable(LOGIN_STEP_2_MODEL, modelResult)
             }

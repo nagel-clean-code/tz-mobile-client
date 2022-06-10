@@ -4,25 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InformationAboutElementFragment">
+    tools:context=".presentation.InformationAboutElementFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/photoImageView1"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/pager_placeholder_image_view1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_height="48dp"
             android:layout_marginTop="6dp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_baseline_image_24" />
+            app:layout_constraintEnd_toStartOf="@id/guideline2"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintTop_toTopOf="parent">
+            <com.google.android.material.tabs.TabLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabBackground="@drawable/tab_selector"
+                app:tabGravity="center"
+                app:tabIndicatorHeight="0dp"
+                android:layout_gravity="bottom" />
+        </androidx.viewpager2.widget.ViewPager2>
 
         <TextView
-            android:id="@+id/textDescription"
+            android:id="@+id/description_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -32,21 +38,21 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@id/guideline1"
-            app:layout_constraintTop_toBottomOf="@+id/photoImageView1"
+            app:layout_constraintTop_toBottomOf="@+id/pager_placeholder_image_view1"
             tools:text="Мобильный телефон Apple iPhone 12 64GB A2403 green (зеленый)" />
 
         <ImageView
-            android:id="@+id/imageCompanyView"
+            android:id="@+id/image_company_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="6dp"
             app:layout_constraintStart_toStartOf="@id/guideline1"
-            app:layout_constraintTop_toBottomOf="@id/textDescription"
+            app:layout_constraintTop_toBottomOf="@id/description_text_view"
             tools:src="@drawable/ic_baseline_image_24" />
 
         <TextView
-            android:id="@+id/priceTextView"
+            android:id="@+id/price_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -55,7 +61,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@id/guideline1"
-            app:layout_constraintTop_toBottomOf="@+id/imageCompanyView"
+            app:layout_constraintTop_toBottomOf="@+id/image_company_view"
             tools:text="999,00 RUB" />
 
         <androidx.constraintlayout.widget.Barrier
@@ -63,11 +69,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="priceTextView,imageCompanyView,textDescription"
+            app:constraint_referenced_ids="price_text_view,image_company_view,description_text_view"
             tools:layout_editor_absoluteY="255dp" />
 
         <TextView
-            android:id="@+id/cashbackTextView"
+            android:id="@+id/cashback_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20sp"
@@ -81,7 +87,7 @@
             tools:text="Кешбэк" />
 
         <TextView
-            android:id="@+id/cashbackTextView1"
+            android:id="@+id/cashback_text_view1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -94,11 +100,11 @@
             android:textColor="@color/white"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="@id/guideline1"
-            app:layout_constraintTop_toBottomOf="@id/cashbackTextView"
+            app:layout_constraintTop_toBottomOf="@id/cashback_text_view"
             tools:text="до 20,00%" />
 
         <TextView
-            android:id="@+id/timeCashbackAccrualHeadTextView"
+            android:id="@+id/time_cashback_accrual_head_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20sp"
@@ -108,12 +114,12 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@id/guideline1"
-            app:layout_constraintTop_toBottomOf="@id/cashbackTextView1"
+            app:layout_constraintTop_toBottomOf="@id/cashback_text_view1"
             tools:text="Время начисления кэшбека" />
 
 
         <TextView
-            android:id="@+id/timeCashbackAccrualTextView1"
+            android:id="@+id/time_cashback_accrual_text_view1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -121,11 +127,11 @@
             android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@id/guideline1"
-            app:layout_constraintTop_toBottomOf="@id/timeCashbackAccrualHeadTextView"
+            app:layout_constraintTop_toBottomOf="@id/time_cashback_accrual_head_text_view"
             tools:text="от 56 до 65 дней" />
 
         <TextView
-            android:id="@+id/conditionsHeadTextView"
+            android:id="@+id/conditions_head_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20sp"
@@ -135,11 +141,11 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@id/guideline1"
-            app:layout_constraintTop_toBottomOf="@id/timeCashbackAccrualTextView1"
+            app:layout_constraintTop_toBottomOf="@id/time_cashback_accrual_text_view1"
             tools:text="Условия" />
 
         <TextView
-            android:id="@+id/conditionsTextView1"
+            android:id="@+id/conditions_text_view1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -147,11 +153,11 @@
             android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@id/guideline1"
-            app:layout_constraintTop_toBottomOf="@id/conditionsHeadTextView"
+            app:layout_constraintTop_toBottomOf="@id/conditions_head_text_view"
             tools:text="от 56 до 65 дней" />
 
         <Button
-            android:id="@+id/expandButton"
+            android:id="@+id/expand_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -162,7 +168,7 @@
             android:textColor="#3F51B5"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@+id/guideline1"
-            app:layout_constraintTop_toBottomOf="@+id/conditionsTextView1" />
+            app:layout_constraintTop_toBottomOf="@+id/conditions_text_view1" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline1"

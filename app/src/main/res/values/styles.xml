@@ -13,5 +13,11 @@
         <item name="android:background">@drawable/buy_with_cashback</item>
     </style>
 
+
+    <style name="roundedImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">10dp</item>
+    </style>
+
     <style name="MyStyle">my_style</style>
 </resources>
