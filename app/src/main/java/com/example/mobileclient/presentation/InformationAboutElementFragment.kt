@@ -42,27 +42,32 @@ class InformationAboutElementFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         campaignsItem = arguments?.getParcelable(Constants.CAMPAIGNS_ITEM)
-
         productsItem = arguments?.getParcelable(Constants.PRODUCTS_ITEM)
 
+        if (campaignsItem != null) {
+            viewCompany()
+        }
+        if (productsItem != null) {
+            viewProduct()
+        }
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        if(campaignsItem != null){
-            viewCompany()
-        }
-        if(productsItem != null){
-            viewProduct()
+    private fun viewCompany() {
+        binding.pagerPlaceholderImageView1.adapter =
+            ImageViewInformationFormPagerAdapter(listOf(campaignsItem?.imageUrl))
+        binding.tabLayout.visibility = View.GONE
+        with(binding) {
+            descriptionTextView.text = campaignsItem!!.name
+            imageCompanyView.visibility = View.GONE
+            priceTextView.visibility = View.GONE
+            cashbackTextView1.text = campaignsItem!!.cashback
+            timeCashbackAccrualTextView1.text = campaignsItem!!.paymentTime
+            conditionsTextView1.text = campaignsItem!!.actions?.get(0)?.text ?: ""
         }
     }
 
-    private fun viewCompany(){
-
-    }
-
-    private fun viewProduct(){
+    private fun viewProduct() {
         binding.pagerPlaceholderImageView1.adapter =
             productsItem!!.imageUrls?.let { ImageViewInformationFormPagerAdapter(it) }
         TabLayoutMediator(binding.tabLayout, binding.pagerPlaceholderImageView1) { tab, position ->
@@ -88,6 +93,7 @@ class InformationAboutElementFragment : Fragment() {
                 putParcelable(Constants.CAMPAIGNS_ITEM, campaignsItem)
             }
         }
+
         fun getNewInstance(productsItem: ProductsItem) = InformationAboutElementFragment().apply {
             arguments = Bundle().apply {
                 putParcelable(Constants.PRODUCTS_ITEM, productsItem)
