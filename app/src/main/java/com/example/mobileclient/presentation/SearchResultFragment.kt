@@ -8,7 +8,10 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mobileclient.Constants.Companion.LOGIN_STEP_2_MODEL
+import com.example.mobileclient.R
+import com.example.mobileclient.data.storage.models.CampaignsItem
 import com.example.mobileclient.data.storage.models.LoginStep2Model
+import com.example.mobileclient.data.storage.models.ProductsItem
 import com.example.mobileclient.data.storage.models.ResponseSearch
 import com.example.mobileclient.databinding.FragmentSearchResultBinding
 import com.example.mobileclient.presentation.adapters.SearchResultAdapter
@@ -41,7 +44,39 @@ class SearchResultFragment : BaseFragment() {
         resultAuthorization = arguments?.get(LOGIN_STEP_2_MODEL) as LoginStep2Model
         textEditListenerFormSearch()
         setupListenerResult()
+        setupListenerSelectedItem()
         return binding.root
+    }
+
+    private fun setupListenerSelectedItem() {
+        viewModel.displayCampaign.observe(viewLifecycleOwner) {
+            displayCampaign(it)
+        }
+        viewModel.displayProduct.observe(viewLifecycleOwner) {
+            displayProduct(it)
+        }
+    }
+
+    private fun displayCampaign(campaignsItem: CampaignsItem) {
+        binding.mainConstraint.visibility = View.GONE
+        childFragmentManager
+            .beginTransaction()
+            .addToBackStack(null)
+            .replace(
+                R.id.container_fragment,
+                InformationAboutElementFragment.getNewInstance(campaignsItem)
+            ).commit()
+    }
+
+    private fun displayProduct(productsItem: ProductsItem) {
+        binding.mainConstraint.visibility = View.GONE
+        childFragmentManager
+            .beginTransaction()
+            .addToBackStack(null)
+            .replace(
+                R.id.container_fragment,
+                InformationAboutElementFragment.getNewInstance(productsItem)
+            ).commit()
     }
 
     private fun setupListenerResult() {
@@ -72,7 +107,7 @@ class SearchResultFragment : BaseFragment() {
         binding.recyclerView.visibility = View.VISIBLE
         val result = viewModel.loadResultLiveData.value?.takeSuccess() as ResponseSearch
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
-        searchAdapter = SearchResultAdapter(result.campaigns, result.products)
+        searchAdapter = SearchResultAdapter(result.campaigns, result.products, viewModel)
         binding.recyclerView.adapter = searchAdapter
     }
 

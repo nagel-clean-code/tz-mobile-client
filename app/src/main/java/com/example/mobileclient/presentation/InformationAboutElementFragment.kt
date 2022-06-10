@@ -6,17 +6,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.example.mobileclient.Constants
+import com.example.mobileclient.R
+import com.example.mobileclient.data.storage.models.CampaignsItem
+import com.example.mobileclient.data.storage.models.ProductsItem
 import com.example.mobileclient.databinding.FragmentInformationAboutElementBinding
 import com.example.mobileclient.presentation.adapters.ImageViewInformationFormPagerAdapter
 import com.example.mobileclient.presentation.viewmodels.InformationAboutElementViewModel
 import com.example.mobileclient.presentation.viewmodels.ModelFactory
+import com.google.android.material.tabs.TabLayoutMediator
 
 
 class InformationAboutElementFragment : Fragment() {
 
     private lateinit var binding: FragmentInformationAboutElementBinding
-    private lateinit var numberPhone: String
+    private var productsItem: ProductsItem? = null
+    private var campaignsItem: CampaignsItem? = null
     private lateinit var viewModel: InformationAboutElementViewModel
 
 
@@ -35,19 +41,56 @@ class InformationAboutElementFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        numberPhone = arguments?.getString(Constants.NUMBER_PHONE)!!
-        setupViewPager()
+        campaignsItem = arguments?.getParcelable(Constants.CAMPAIGNS_ITEM)
+
+        productsItem = arguments?.getParcelable(Constants.PRODUCTS_ITEM)
+
         return binding.root
     }
 
-    private fun setupViewPager(){
-//        binding.pagerPlaceholderImageView1.adapter = ImageViewInformationFormPagerAdapter() //FIXME
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if(campaignsItem != null){
+            viewCompany()
+        }
+        if(productsItem != null){
+            viewProduct()
+        }
+    }
+
+    private fun viewCompany(){
+
+    }
+
+    private fun viewProduct(){
+        binding.pagerPlaceholderImageView1.adapter =
+            productsItem!!.imageUrls?.let { ImageViewInformationFormPagerAdapter(it) }
+        TabLayoutMediator(binding.tabLayout, binding.pagerPlaceholderImageView1) { tab, position ->
+            //Some implementation
+        }.attach()
+        with(binding) {
+            descriptionTextView.text = productsItem!!.name
+            Glide.with(imageCompanyView.context)
+                .load(productsItem!!.campaignImageUrl)
+                .placeholder(R.drawable.ic_baseline_image_24)
+                .error(R.drawable.ic_baseline_broken_image_24)
+                .into(imageCompanyView)
+            priceTextView.text = productsItem!!.price
+            cashbackTextView1.text = productsItem!!.cashback
+            timeCashbackAccrualTextView1.text = productsItem!!.paymentTime
+            conditionsTextView1.text = productsItem!!.actions?.get(0)?.text ?: ""
+        }
     }
 
     companion object {
-        fun getNewInstance(numberPhone: String) = InformationAboutElementFragment().apply {
+        fun getNewInstance(campaignsItem: CampaignsItem) = InformationAboutElementFragment().apply {
             arguments = Bundle().apply {
-                putString(Constants.NUMBER_PHONE, numberPhone)  //FIXME
+                putParcelable(Constants.CAMPAIGNS_ITEM, campaignsItem)
+            }
+        }
+        fun getNewInstance(productsItem: ProductsItem) = InformationAboutElementFragment().apply {
+            arguments = Bundle().apply {
+                putParcelable(Constants.PRODUCTS_ITEM, productsItem)
             }
         }
     }

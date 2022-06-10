@@ -23,7 +23,6 @@ class ImageViewInformationFormPagerAdapter(
         with(holder.binding) {
             Glide.with(image.context)
                 .load(imageUrls[position])
-                .centerCrop()
                 .placeholder(R.drawable.ic_baseline_image_24)
                 .error(R.drawable.ic_baseline_broken_image_24)
                 .into(image)

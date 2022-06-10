@@ -15,15 +15,14 @@
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toStartOf="@id/guideline2"
         app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/pager_placeholder_image_view1"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        app:shapeAppearanceOverlay="@style/roundedImageView"
         android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="2dp"
         android:layout_marginBottom="2dp"
         android:background="@color/white"
@@ -31,21 +30,22 @@
         app:layout_constraintEnd_toStartOf="@id/guideline2"
         app:layout_constraintStart_toStartOf="@id/guideline1"
         app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/roundedImageView"
         tools:src="@drawable/ic_baseline_image_24" />
 
     <TextView
         android:id="@+id/name_company_text_view1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:ellipsize="end"
+        android:text="@string/text_view_8"
         android:textColor="@color/black"
         android:textSize="16sp"
-        android:layout_marginTop="5dp"
         app:layout_constrainedWidth="true"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/pager_placeholder_image_view1"
-        app:layout_constraintTop_toBottomOf="@+id/pager_placeholder_image_view1"
-        tools:text="John Smith" />
+        app:layout_constraintTop_toBottomOf="@+id/pager_placeholder_image_view1" />
 
     <TextView
         android:id="@+id/cashback_text_view1"
@@ -56,11 +56,11 @@
         android:ellipsize="end"
         android:lines="1"
         android:padding="5dp"
+        android:text="@string/text_view_10"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/pager_placeholder_image_view1"
-        app:layout_constraintStart_toStartOf="@id/name_company_text_view1"
-        tools:text="до 12,00%" />
+        app:layout_constraintStart_toStartOf="@id/name_company_text_view1" />
 
     <ImageView
         android:id="@+id/background2"
@@ -71,38 +71,38 @@
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@id/guideline3"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/pager_placeholder_image_view2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
         android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="2dp"
         android:layout_marginBottom="2dp"
         android:background="@color/white"
         app:layout_constraintDimensionRatio="1:1"
-        app:shapeAppearanceOverlay="@style/roundedImageView"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@id/guideline3"
         app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/roundedImageView"
         tools:src="@drawable/ic_baseline_image_24" />
 
     <TextView
         android:id="@+id/nameCompanyTextView2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:ellipsize="end"
         android:layout_marginTop="5dp"
+        android:ellipsize="end"
         android:lines="1"
+        android:text="@string/text_view_8"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constrainedWidth="true"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/pager_placeholder_image_view2"
-        app:layout_constraintTop_toBottomOf="@+id/pager_placeholder_image_view2"
-        tools:text="John Smith" />
+        app:layout_constraintTop_toBottomOf="@+id/pager_placeholder_image_view2" />
 
     <TextView
         android:id="@+id/cashbackTextView2"
@@ -113,11 +113,11 @@
         android:ellipsize="end"
         android:lines="1"
         android:padding="5dp"
+        android:text="@string/text_view_9"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/pager_placeholder_image_view2"
-        app:layout_constraintStart_toStartOf="@id/nameCompanyTextView2"
-        tools:text="до 12,00%" />
+        app:layout_constraintStart_toStartOf="@id/nameCompanyTextView2" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier"
@@ -136,7 +136,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.06" />
+        app:layout_constraintGuide_percent="0.04" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -157,6 +157,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.94" />
+        app:layout_constraintGuide_percent="0.96" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

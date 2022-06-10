@@ -2,6 +2,8 @@ package com.example.mobileclient
 
 class Constants {
     companion object {
+        const val PRODUCTS_ITEM = "PRODUCTS_ITEM"
+        const val CAMPAIGNS_ITEM = "CAMPAIGNS_ITEM"
         const val NUMBER_PHONE = "NUMBER_PHONE"
         const val LOGIN_STEP_1_MODEL = "LOGIN_STEP_1_MODEL"
         const val LOGIN_STEP_2_MODEL = "LOGIN_STEP_2_MODEL"

@@ -14,23 +14,42 @@ import com.example.mobileclient.databinding.ItemShopBinding
 
 class SearchResultAdapter(
     private val campaigns: List<CampaignsItem?>?,
-    private val products: List<ProductsItem?>?
+    private val products: List<ProductsItem?>?,
+    private val listener: ListenerItem
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
 
     private var currentPositionCompany: Int = 0
     private var currentPositionProduct: Int = 0
 
     override fun onClick(p0: View?) {
-        TODO("Not yet implemented")
+        if(p0?.tag is CampaignsItem){
+            listener.onDisplayCampaign(p0.tag as CampaignsItem)
+        }else{
+            listener.onDisplayProduct(p0?.tag as ProductsItem)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflate = LayoutInflater.from(parent.context)
         return if (campaigns != null && currentPositionCompany < campaigns.size - 1) {
             val binding = ItemShopBinding.inflate(inflate, parent, false)
+            with(binding) {
+                pagerPlaceholderImageView1.setOnClickListener(this@SearchResultAdapter)
+                nameCompanyTextView1.setOnClickListener(this@SearchResultAdapter)
+                cashbackTextView1.setOnClickListener(this@SearchResultAdapter)
+                pagerPlaceholderImageView2.setOnClickListener(this@SearchResultAdapter)
+                nameCompanyTextView2.setOnClickListener(this@SearchResultAdapter)
+                cashbackTextView2.setOnClickListener(this@SearchResultAdapter)
+            }
             ItemShopViewHolder(binding)
         } else {
             val binding = ItemProductBinding.inflate(inflate, parent, false)
+            with(binding){
+                pagerPlaceholderImageView1.setOnClickListener(this@SearchResultAdapter)
+                nameCompanyTextView1.setOnClickListener(this@SearchResultAdapter)
+                priceTextView1.setOnClickListener(this@SearchResultAdapter)
+                cashbackTextView1.setOnClickListener(this@SearchResultAdapter)
+            }
             ItemProductViewHolder(binding)
         }
     }
@@ -40,33 +59,52 @@ class SearchResultAdapter(
             holder as ItemShopViewHolder
             with(holder.binding) {
                 //Первая компания
+                pagerPlaceholderImageView1.tag = campaigns[currentPositionCompany]
                 loadImage(
                     campaigns[currentPositionCompany]?.imageUrl,
                     pagerPlaceholderImageView1
                 )
+
+                nameCompanyTextView1.tag = campaigns[currentPositionCompany]
                 nameCompanyTextView1.text = campaigns[currentPositionCompany]?.name
+
+                cashbackTextView1.tag = campaigns[currentPositionCompany]
                 cashbackTextView1.text = campaigns[currentPositionCompany]?.cashback
                 currentPositionCompany++
 
                 //Вторая компания
+                pagerPlaceholderImageView2.tag = campaigns[currentPositionCompany]
                 loadImage(
                     campaigns[currentPositionCompany]?.imageUrl,
                     pagerPlaceholderImageView2
                 )
+
+                nameCompanyTextView2.tag = campaigns[currentPositionCompany]
                 nameCompanyTextView2.text = campaigns[currentPositionCompany]?.name
+
+                cashbackTextView2.tag = campaigns[currentPositionCompany]
                 cashbackTextView2.text = campaigns[currentPositionCompany]?.cashback
                 currentPositionCompany++
             }
         } else if (products != null && currentPositionProduct < products.size - 1) {
             holder as ItemProductViewHolder
             with(holder.binding) {
+                pagerPlaceholderImageView1.tag = products[currentPositionProduct]
                 loadImage(
                     products[currentPositionProduct]?.imageUrls?.get(0),
                     pagerPlaceholderImageView1
                 )
+
+                imageCompanyView.tag = products[currentPositionProduct]
                 loadImage(products[currentPositionProduct]?.campaignImageUrl, imageCompanyView)
+
+                nameCompanyTextView1.tag = products[currentPositionProduct]
                 nameCompanyTextView1.text = products[currentPositionProduct]?.name
+
+                priceTextView1.tag = products[currentPositionProduct]
                 priceTextView1.text = products[currentPositionProduct]?.price
+
+                cashbackTextView1.tag = products[currentPositionProduct]
                 cashbackTextView1.text = products[currentPositionProduct]?.cashback
             }
             currentPositionProduct++
@@ -108,5 +146,10 @@ class SearchResultAdapter(
     class ItemProductViewHolder(
         val binding: ItemProductBinding,
     ) : RecyclerView.ViewHolder(binding.root)
+
+    interface ListenerItem {
+        fun onDisplayProduct(product: ProductsItem)
+        fun onDisplayCampaign(campaign: CampaignsItem)
+    }
 }
 

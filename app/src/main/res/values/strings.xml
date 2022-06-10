@@ -18,4 +18,15 @@
     <string name="by_with_cashback">Купить с кешбэком</string>
     <string name="search_stores_products">Поиск магазинов, товаров</string>
     <string name="problems_with_Internet">Проблемы с интернетом, повторите попытку позже</string>
+    <string name="text_test_1">Мобильный телефон Apple iPhone 12 64GB A2403 green (зеленый)</string>
+    <string name="text_view_2">999,00 RUB</string>
+    <string name="text_vew_3">Кешбэк</string>
+    <string name="text_view_4">до 20,00%</string>
+    <string name="text_view_5">Время начисления кэшбека</string>
+    <string name="text_view_6">от 56 до 65 дней</string>
+    <string name="text_view_7">от 56 до 65 дней</string>
+    <string name="text_view_8">John Smith</string>
+    <string name="text_view_9">до 12,00%</string>
+    <string name="text_view_10">до 12,00%</string>
+    <string name="text_view_12">Условия</string>
 </resources>
