@@ -1,29 +1,29 @@
 package com.example.mobileclient.presentation
 
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mobileclient.Constants.Companion.LOGIN_STEP_2_MODEL
-import com.example.mobileclient.R
+import com.example.mobileclient.Constants
+import com.example.mobileclient.Constants.Companion.RESPONSE_SEARCH
 import com.example.mobileclient.data.storage.models.CampaignsItem
-import com.example.mobileclient.data.storage.models.LoginStep2Model
 import com.example.mobileclient.data.storage.models.ProductsItem
 import com.example.mobileclient.data.storage.models.ResponseSearch
 import com.example.mobileclient.databinding.FragmentSearchResultBinding
 import com.example.mobileclient.presentation.adapters.SearchResultAdapter
-import com.example.mobileclient.presentation.models.state.takeSuccess
+import com.example.mobileclient.presentation.contract.CustomAction
+import com.example.mobileclient.presentation.contract.HasCustomActionToolbar
+import com.example.mobileclient.presentation.contract.navigator
 import com.example.mobileclient.presentation.viewmodels.ModelFactory
 import com.example.mobileclient.presentation.viewmodels.SearchResultViewModel
 
-class SearchResultFragment : BaseFragment() {
+class SearchResultFragment : BaseFragment(), HasCustomActionToolbar {
 
     private lateinit var binding: FragmentSearchResultBinding
     private lateinit var viewModel: SearchResultViewModel
-    private lateinit var resultAuthorization: LoginStep2Model
+    private lateinit var responseSearch: ResponseSearch
     private lateinit var searchAdapter: SearchResultAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,92 +41,47 @@ class SearchResultFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        resultAuthorization = arguments?.get(LOGIN_STEP_2_MODEL) as LoginStep2Model
-        textEditListenerFormSearch()
-        setupListenerResult()
+        responseSearch = arguments?.get(RESPONSE_SEARCH) as ResponseSearch
+        showResult()
         setupListenerSelectedItem()
         return binding.root
     }
 
     private fun setupListenerSelectedItem() {
         viewModel.displayCampaign.observe(viewLifecycleOwner) {
-            displayCampaign(it)
+            if (it != null) {
+                displayCampaign(it)
+                viewModel.displayCampaign.postValue(null)
+            }
         }
         viewModel.displayProduct.observe(viewLifecycleOwner) {
-            displayProduct(it)
+            if (it != null) {
+                displayProduct(it)
+                viewModel.displayProduct.postValue(null)
+            }
         }
     }
 
-    private fun displayCampaign(campaignsItem: CampaignsItem) {
-        binding.mainConstraint.visibility = View.GONE
-        childFragmentManager
-            .beginTransaction()
-            .addToBackStack(null)
-            .replace(
-                R.id.container_fragment,
-                InformationAboutElementFragment.getNewInstance(campaignsItem)
-            ).commit()
-    }
+    private fun displayCampaign(campaignsItem: CampaignsItem) =
+        navigator().showInformationAboutCampaignFragment(campaignsItem)
 
-    private fun displayProduct(productsItem: ProductsItem) {
-        binding.mainConstraint.visibility = View.GONE
-        childFragmentManager
-            .beginTransaction()
-            .addToBackStack(null)
-            .replace(
-                R.id.container_fragment,
-                InformationAboutElementFragment.getNewInstance(productsItem)
-            ).commit()
-    }
-
-    private fun setupListenerResult() {
-        viewModel.loadResultLiveData.observe(viewLifecycleOwner) { result ->
-            renderResult(
-                root = binding.root,
-                result = result,
-                onSuccessResult = {
-                    binding.progressBar.visibility = View.GONE
-                    binding.textError.visibility = View.GONE
-                    showResult()
-                },
-                onPending = {
-                    binding.progressBar.visibility = View.VISIBLE
-                    binding.textError.visibility = View.GONE
-                },
-                onError = {
-                    binding.progressBar.visibility = View.GONE
-                    binding.textError.text = it.localizedMessage
-                    binding.textError.visibility = View.VISIBLE
-                }
-            )
-        }
-    }
+    private fun displayProduct(productsItem: ProductsItem) =
+        navigator().showInformationAboutProductFragment(productsItem)
 
     private fun showResult() {
-        binding.searchTextInputLayout.visibility = View.GONE
-        binding.recyclerView.visibility = View.VISIBLE
-        val result = viewModel.loadResultLiveData.value?.takeSuccess() as ResponseSearch
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
-        searchAdapter = SearchResultAdapter(result.campaigns, result.products, viewModel)
+        searchAdapter =
+            SearchResultAdapter(responseSearch.campaigns, responseSearch.products, viewModel)
         binding.recyclerView.adapter = searchAdapter
     }
 
-    private fun textEditListenerFormSearch() {
-        binding.searchEditText.setOnEditorActionListener { _, _, keyEvent ->
-            if (keyEvent == null || (keyEvent.action == KeyEvent.ACTION_DOWN)) {
-                viewModel.searchByString(binding.searchEditText.text.toString())
-                return@setOnEditorActionListener false
-            } else {
-                return@setOnEditorActionListener true
+    companion object {
+        fun getNewInstance(responseSearch: ResponseSearch) = SearchResultFragment().apply {
+            arguments = Bundle().apply {
+                putParcelable(RESPONSE_SEARCH, responseSearch)
             }
         }
     }
 
-    companion object {
-        fun getNewInstance(modelResult: LoginStep2Model) = SearchResultFragment().apply {
-            arguments = Bundle().apply {
-                putParcelable(LOGIN_STEP_2_MODEL, modelResult)
-            }
-        }
-    }
+    override fun getCustomAction(): CustomAction = CustomAction(Constants.TYPE_ICON_GO_BACK)
 }

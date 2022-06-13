@@ -34,8 +34,9 @@ class ModelFactory() : ViewModelProvider.NewInstanceFactory() {
                 loginPhoneUseCase
             ) as T
             AuthorizationViewModel::class.java -> AuthorizationViewModel(loginPhoneUseCase) as T
-            SearchResultViewModel::class.java -> SearchResultViewModel(searchByStringUseCase) as T
+            SearchResultViewModel::class.java -> SearchResultViewModel() as T
             InformationAboutElementViewModel::class.java -> InformationAboutElementViewModel() as T
+            SearchViewModel::class.java -> SearchViewModel(searchByStringUseCase) as T
             else -> {
                 throw IllegalArgumentException("Не верный тип ViewModel")
             }

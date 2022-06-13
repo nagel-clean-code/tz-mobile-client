@@ -13,12 +13,14 @@ import com.example.mobileclient.data.storage.models.CampaignsItem
 import com.example.mobileclient.data.storage.models.ProductsItem
 import com.example.mobileclient.databinding.FragmentInformationAboutElementBinding
 import com.example.mobileclient.presentation.adapters.ImageViewInformationFormPagerAdapter
+import com.example.mobileclient.presentation.contract.CustomAction
+import com.example.mobileclient.presentation.contract.HasCustomActionToolbar
 import com.example.mobileclient.presentation.viewmodels.InformationAboutElementViewModel
 import com.example.mobileclient.presentation.viewmodels.ModelFactory
 import com.google.android.material.tabs.TabLayoutMediator
 
 
-class InformationAboutElementFragment : Fragment() {
+class InformationAboutElementFragment : Fragment(), HasCustomActionToolbar {
 
     private lateinit var binding: FragmentInformationAboutElementBinding
     private var productsItem: ProductsItem? = null
@@ -101,4 +103,5 @@ class InformationAboutElementFragment : Fragment() {
         }
     }
 
+    override fun getCustomAction(): CustomAction = CustomAction(Constants.TYPE_ICON_GO_BACK)
 }

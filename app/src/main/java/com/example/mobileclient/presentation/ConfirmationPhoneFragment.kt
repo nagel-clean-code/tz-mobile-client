@@ -12,10 +12,12 @@ import com.example.mobileclient.Constants.Companion.LOGIN_STEP_2_MODEL
 import com.example.mobileclient.Constants.Companion.NUMBER_PHONE
 import com.example.mobileclient.R
 import com.example.mobileclient.databinding.FragmentConfirmationPhoneBinding
+import com.example.mobileclient.presentation.contract.CustomAction
+import com.example.mobileclient.presentation.contract.HasCustomActionToolbar
 import com.example.mobileclient.presentation.viewmodels.ConfirmationPhoneViewModel
 import com.example.mobileclient.presentation.viewmodels.ModelFactory
 
-class ConfirmationPhoneFragment : BaseFragment() {
+class ConfirmationPhoneFragment : BaseFragment(), HasCustomActionToolbar {
     private lateinit var binding: FragmentConfirmationPhoneBinding
     private lateinit var numberPhone: String
     private lateinit var viewModel: ConfirmationPhoneViewModel
@@ -110,4 +112,5 @@ class ConfirmationPhoneFragment : BaseFragment() {
         }
     }
 
+    override fun getCustomAction(): CustomAction = CustomAction(Constants.TYPE_ICON_GO_BACK)
 }

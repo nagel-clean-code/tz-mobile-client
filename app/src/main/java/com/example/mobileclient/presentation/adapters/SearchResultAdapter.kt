@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.view.forEach
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mobileclient.R
@@ -33,23 +34,11 @@ class SearchResultAdapter(
         val inflate = LayoutInflater.from(parent.context)
         return if (campaigns != null && currentPositionCompany < campaigns.size - 1) {
             val binding = ItemShopBinding.inflate(inflate, parent, false)
-            with(binding) {
-                pagerPlaceholderImageView1.setOnClickListener(this@SearchResultAdapter)
-                nameCompanyTextView1.setOnClickListener(this@SearchResultAdapter)
-                cashbackTextView1.setOnClickListener(this@SearchResultAdapter)
-                pagerPlaceholderImageView2.setOnClickListener(this@SearchResultAdapter)
-                nameCompanyTextView2.setOnClickListener(this@SearchResultAdapter)
-                cashbackTextView2.setOnClickListener(this@SearchResultAdapter)
-            }
+            binding.root.forEach { it.setOnClickListener(this@SearchResultAdapter) }
             ItemShopViewHolder(binding)
         } else {
             val binding = ItemProductBinding.inflate(inflate, parent, false)
-            with(binding){
-                pagerPlaceholderImageView1.setOnClickListener(this@SearchResultAdapter)
-                nameCompanyTextView1.setOnClickListener(this@SearchResultAdapter)
-                priceTextView1.setOnClickListener(this@SearchResultAdapter)
-                cashbackTextView1.setOnClickListener(this@SearchResultAdapter)
-            }
+            binding.root.forEach { it.setOnClickListener(this@SearchResultAdapter) }
             ItemProductViewHolder(binding)
         }
     }
