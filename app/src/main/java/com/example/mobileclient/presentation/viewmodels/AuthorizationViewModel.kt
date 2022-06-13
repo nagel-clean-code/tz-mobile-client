@@ -2,6 +2,8 @@ package com.example.mobileclient.presentation.viewmodels
 
 import com.example.mobileclient.data.storage.models.LoginStep1Model
 import com.example.mobileclient.domain.usecase.LoginPhoneUseCase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class AuthorizationViewModel(
     private val loginPhoneUseCase: LoginPhoneUseCase
@@ -12,8 +14,10 @@ class AuthorizationViewModel(
 
 
     fun sendCode(number: String) = into(_loadResultMutableLiveData) {
-        val result = loginPhoneUseCase.execute(number)
-        if(result.errorMessage?.isBlank() == true){
+        val result = withContext(Dispatchers.IO) {
+            return@withContext loginPhoneUseCase.execute(number)
+        }
+        if(result.errorMessage == null || result.errorMessage!!.isBlank()){
             return@into result
         }else {
             throw Exception(result.errorMessage)

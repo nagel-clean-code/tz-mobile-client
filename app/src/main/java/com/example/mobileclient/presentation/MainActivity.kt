@@ -1,14 +1,11 @@
 package com.example.mobileclient.presentation
 
 import android.os.Bundle
-import android.os.Parcelable
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.LifecycleOwner
 import com.example.mobileclient.Constants
 import com.example.mobileclient.Constants.Companion.TYPE_ICON_CLOSE
 import com.example.mobileclient.Constants.Companion.TYPE_ICON_DEFAULT
@@ -27,7 +24,12 @@ class MainActivity : AppCompatActivity(), Navigator {
         get() = supportFragmentManager.findFragmentById(R.id.fragment_container)!!
 
     private val fragmentListener = object : FragmentManager.FragmentLifecycleCallbacks() {
-        override fun onFragmentViewCreated(fm: FragmentManager, f: Fragment, v: View, savedInstanceState: Bundle?) {
+        override fun onFragmentViewCreated(
+            fm: FragmentManager,
+            f: Fragment,
+            v: View,
+            savedInstanceState: Bundle?
+        ) {
             super.onFragmentViewCreated(fm, f, v, savedInstanceState)
             updateUi()
         }
@@ -37,9 +39,9 @@ class MainActivity : AppCompatActivity(), Navigator {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater).also { setContentView(it.root) }
         supportFragmentManager.registerFragmentLifecycleCallbacks(fragmentListener, false)
-        if(savedInstanceState == null){
-            //showFragmentLogin()                       //FIXME пока тестю работу с поиском, потом восстановить
-            showFragmentSearch(LoginStep2Model())       //FIXME
+        if (savedInstanceState == null) {
+            showFragmentLogin()                       //FIXME пока тестю работу с поиском, потом восстановить
+//            showFragmentSearch(LoginStep2Model())       //FIXME
         }
         initActionBarToolbar()
         setupListenerResult()
@@ -66,7 +68,7 @@ class MainActivity : AppCompatActivity(), Navigator {
         ) { _, bundle ->
             val modelResult: LoginStep2Model =
                 bundle.get(Constants.LOGIN_STEP_2_MODEL) as LoginStep2Model
-//            showFragmentConfirmationPhone(number!!)
+            showFragmentSearch(modelResult)
         }
     }
 
@@ -97,7 +99,9 @@ class MainActivity : AppCompatActivity(), Navigator {
     }
 
     override fun goBack() {
-        onBackPressed()
+        if (supportFragmentManager.backStackEntryCount != 1) {
+            onBackPressed()
+        }
     }
 
     private fun initActionBarToolbar(): Toolbar? {
@@ -128,7 +132,7 @@ class MainActivity : AppCompatActivity(), Navigator {
             supportActionBar?.setDisplayHomeAsUpEnabled(false)
             supportActionBar?.setDisplayShowHomeEnabled(false)
         }
-        when(action.typeIcon){
+        when (action.typeIcon) {
             TYPE_ICON_CLOSE -> {
                 mActionBarToolbar?.setNavigationIcon(R.drawable.ic_baseline_close_24)
                 setSupportActionBar(mActionBarToolbar)
@@ -141,7 +145,7 @@ class MainActivity : AppCompatActivity(), Navigator {
                 supportActionBar?.setDisplayHomeAsUpEnabled(true)
                 supportActionBar?.setHomeButtonEnabled(true)
             }
-            TYPE_ICON_DEFAULT ->{
+            TYPE_ICON_DEFAULT -> {
                 mActionBarToolbar?.navigationIcon = null
                 setSupportActionBar(mActionBarToolbar)
                 supportActionBar?.setDisplayShowTitleEnabled(false)

@@ -46,8 +46,6 @@ class AuthorizationFragment : BaseFragment(), HasCustomActionToolbar {
     private fun buttonListener(){
         binding.button.setOnClickListener {
             viewModel.sendCode(binding.inputNumber.text.toString())
-            if(viewModel.loadResultLiveData.value is SuccessResult)
-                returnResult()
         }
     }
 
@@ -59,6 +57,7 @@ class AuthorizationFragment : BaseFragment(), HasCustomActionToolbar {
                 onSuccessResult = {
                     binding.progressBar.visibility = View.GONE
                     binding.textError.visibility = View.GONE
+                    returnResult()
                 },
                 onPending = {
                     binding.progressBar.visibility = View.VISIBLE

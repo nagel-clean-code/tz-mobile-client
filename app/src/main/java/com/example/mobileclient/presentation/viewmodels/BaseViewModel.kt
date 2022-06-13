@@ -15,7 +15,7 @@ typealias MutableLiveResult<T> = MutableLiveData<Result<T>>
 
 open class BaseViewModel: ViewModel() {
 
-    fun <T> into(liveResult: MutableLiveResult<T>, block: () -> T) = viewModelScope.launch {
+    fun <T> into(liveResult: MutableLiveResult<T>, block: suspend () -> T) = viewModelScope.launch {
         liveResult.value = PendingResult()
         try {
             liveResult.value = SuccessResult(block())

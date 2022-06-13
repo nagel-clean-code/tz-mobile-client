@@ -15,16 +15,16 @@ import java.util.concurrent.CountDownLatch
 class RestRequestImpl : RestRequest {
     private val okHttpClient = OkHttpClient()
 
-    override fun loginPhoneStep1(numberPhone: String): LoginStep1Model {
+    override suspend fun loginPhoneStep1(numberPhone: String): LoginStep1Model {
         val result = request<LoginStep1Model>(
-            Constants.LINK_LOGIN_STEP_2_API.format(numberPhone),
+            Constants.LINK_LOGIN_STEP_1_API.format(numberPhone),
             LoginStep1Model::class.java
         )
         result.first?.errorMessage = result.second
         return result.first!!
     }
 
-    override fun confirmCode(numberPhone: String, code: String): LoginStep2Model {
+    override suspend fun confirmCode(numberPhone: String, code: String): LoginStep2Model {
         val result = request<LoginStep2Model>(
             Constants.LINK_LOGIN_STEP_2_API.format(numberPhone, code),
             LoginStep2Model::class.java
@@ -33,7 +33,7 @@ class RestRequestImpl : RestRequest {
         return result.first!!
     }
 
-    override fun search(str: String): ResponseSearch {
+    override suspend fun search(str: String): ResponseSearch {
         val result: Pair<ResponseSearch?, String?> = request<ResponseSearch>(
             Constants.LINK_SEARCH_API.format(str),
             ResponseSearch::class.java
@@ -42,7 +42,7 @@ class RestRequestImpl : RestRequest {
     }
 
     /** @return Pair<ModelData,ErrorMessage> */
-    private fun <T> request(url: String, clazz: Class<T>): Pair<T?, String?> {
+    private suspend fun <T> request(url: String, clazz: Class<T>): Pair<T?, String?> {
         var resultConfirm: T? = null
         var message: String? = null
         val countDownLatch = CountDownLatch(1)

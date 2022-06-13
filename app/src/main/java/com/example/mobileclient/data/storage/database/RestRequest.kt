@@ -6,7 +6,7 @@ import com.example.mobileclient.data.storage.models.ResponseSearch
 
 
 interface RestRequest {
-    fun loginPhoneStep1(numberPhone: String): LoginStep1Model
-    fun confirmCode(numberPhone: String, code: String): LoginStep2Model
-    fun search(str: String): ResponseSearch
+    suspend fun loginPhoneStep1(numberPhone: String): LoginStep1Model
+    suspend fun confirmCode(numberPhone: String, code: String): LoginStep2Model
+    suspend fun search(str: String): ResponseSearch
 }

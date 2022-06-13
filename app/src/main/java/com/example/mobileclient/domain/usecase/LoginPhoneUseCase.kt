@@ -8,6 +8,6 @@ import com.example.mobileclient.domain.repository.UtcoinRepository
  * @return номер телефона в правильном формате
  */
 class LoginPhoneUseCase(private val repository: UtcoinRepository) {
-    fun execute(numberPhone: String): LoginStep1Model = repository.loginPhone(numberPhone)
+    suspend fun execute(numberPhone: String): LoginStep1Model = repository.loginPhone(numberPhone)
 
 }

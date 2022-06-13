@@ -14,6 +14,7 @@ import com.example.mobileclient.R
 import com.example.mobileclient.databinding.FragmentConfirmationPhoneBinding
 import com.example.mobileclient.presentation.contract.CustomAction
 import com.example.mobileclient.presentation.contract.HasCustomActionToolbar
+import com.example.mobileclient.presentation.models.state.takeSuccess
 import com.example.mobileclient.presentation.viewmodels.ConfirmationPhoneViewModel
 import com.example.mobileclient.presentation.viewmodels.ModelFactory
 
@@ -85,7 +86,7 @@ class ConfirmationPhoneFragment : BaseFragment(), HasCustomActionToolbar {
         parentFragmentManager.popBackStack()
         parentFragmentManager.setFragmentResult(
             Constants.FRAGMENT_CONFIRMATION,
-            bundleOf(LOGIN_STEP_2_MODEL to viewModel.loadResultLiveData.value)
+            bundleOf(LOGIN_STEP_2_MODEL to viewModel.loadResultLiveData.value?.takeSuccess())
         )
     }
 
