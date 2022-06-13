@@ -24,7 +24,7 @@ class SearchResultFragment : BaseFragment(), HasCustomActionToolbar {
     private lateinit var binding: FragmentSearchResultBinding
     private lateinit var viewModel: SearchResultViewModel
     private lateinit var responseSearch: ResponseSearch
-    private lateinit var searchAdapter: SearchResultAdapter
+    private var searchAdapter: SearchResultAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +42,9 @@ class SearchResultFragment : BaseFragment(), HasCustomActionToolbar {
         savedInstanceState: Bundle?
     ): View? {
         responseSearch = arguments?.get(RESPONSE_SEARCH) as ResponseSearch
-        showResult()
+        if (searchAdapter == null) {
+            showResult()
+        }
         setupListenerSelectedItem()
         return binding.root
     }
@@ -60,6 +62,12 @@ class SearchResultFragment : BaseFragment(), HasCustomActionToolbar {
                 viewModel.displayProduct.postValue(null)
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewModel.displayCampaign.removeObservers(viewLifecycleOwner)
+        viewModel.displayProduct.removeObservers(viewLifecycleOwner)
     }
 
     private fun displayCampaign(campaignsItem: CampaignsItem) =

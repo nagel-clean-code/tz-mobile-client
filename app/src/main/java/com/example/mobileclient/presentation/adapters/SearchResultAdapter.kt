@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.view.forEach
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -76,7 +77,12 @@ class SearchResultAdapter(
                 currentPositionCompany++
             }
         } else if (products != null && currentPositionProduct < products.size - 1) {
-            holder as ItemProductViewHolder
+            try {
+                holder as ItemProductViewHolder //FIXME почему то иногда происходит сбой и не кастится, хотя по логики такого не должно быть
+            }catch (e: Exception){
+                e.printStackTrace()
+                return
+            }
             with(holder.binding) {
                 pagerPlaceholderImageView1.tag = products[currentPositionProduct]
                 loadImage(
