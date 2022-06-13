@@ -40,8 +40,8 @@ class MainActivity : AppCompatActivity(), Navigator {
         binding = ActivityMainBinding.inflate(layoutInflater).also { setContentView(it.root) }
         supportFragmentManager.registerFragmentLifecycleCallbacks(fragmentListener, false)
         if (savedInstanceState == null) {
-            showFragmentLogin()                       //FIXME пока тестю работу с поиском, потом восстановить
-//            showFragmentSearch(LoginStep2Model())       //FIXME
+//            showFragmentLogin()   //TODO Для теста можно закоментить
+            showFragmentSearch(LoginStep2Model())
         }
         initActionBarToolbar()
         setupListenerResult()

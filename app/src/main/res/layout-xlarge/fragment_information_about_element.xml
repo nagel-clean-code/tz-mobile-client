@@ -18,7 +18,7 @@
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/pager_placeholder_image_view1"
                 android:layout_width="wrap_content"
-                android:layout_height="250dp"
+                android:layout_height="200dp"
                 app:layout_constraintEnd_toStartOf="@id/guideline2"
                 app:layout_constraintStart_toStartOf="@id/guideline1"
                 app:layout_constraintTop_toTopOf="@id/guidelineTop1" />
@@ -206,14 +206,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.04" />
+                app:layout_constraintGuide_percent="0.14" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.96" />
+                app:layout_constraintGuide_percent="0.86" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guidelineTop1"

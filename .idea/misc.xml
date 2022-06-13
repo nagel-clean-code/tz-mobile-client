@@ -17,18 +17,26 @@
         <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/drawable/tab_selector.xml" value="0.1485" />
         <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout-land/fragment_authorization.xml" value="0.13198573127229488" />
         <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout-large/fragment_authorization.xml" value="0.18" />
-        <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout-large/fragment_confirmation_phone.xml" value="0.17" />
+        <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout-large/fragment_confirmation_phone.xml" value="0.15" />
+        <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout-large/fragment_information_about_element.xml" value="0.11" />
+        <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout-large/fragment_search.xml" value="0.1" />
+        <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout-large/fragment_search_result.xml" value="0.1" />
         <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout-v28/fragment_authorization.xml" value="0.209375" />
+        <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout-xlarge/fragment_authorization.xml" value="0.1" />
+        <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout-xlarge/fragment_confirmation_phone.xml" value="0.1" />
+        <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout-xlarge/fragment_information_about_element.xml" value="0.1" />
+        <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout-xlarge/fragment_search.xml" value="0.1" />
+        <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout-xlarge/fragment_search_result.xml" value="0.1" />
         <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout/activity_entrance.xml" value="0.209375" />
         <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout/activity_main.xml" value="0.1953125" />
         <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout/fragment_authorization.xml" value="0.22" />
-        <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout/fragment_confirmation_phone.xml" value="0.22" />
-        <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout/fragment_information_about_element.xml" value="0.2" />
+        <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout/fragment_confirmation_phone.xml" value="0.18" />
+        <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout/fragment_information_about_element.xml" value="0.22" />
         <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout/fragment_login.xml" value="0.25" />
         <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout/fragment_search.xml" value="0.1718683197947841" />
         <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout/fragment_search_result.xml" value="0.20776699029126214" />
         <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout/item_image_pager_view.xml" value="0.1718683197947841" />
-        <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout/item_product.xml" value="0.33" />
+        <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout/item_product.xml" value="0.18" />
         <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout/item_shop.xml" value="0.1" />
         <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/layout/toolbar_actionbar.xml" value="0.209375" />
         <entry key="..\:/Users/dazen/AndroidStudioProjects/MobileClient/app/src/main/res/menu/action_close.xml" value="0.209375" />
