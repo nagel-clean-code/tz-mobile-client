@@ -1,5 +1,6 @@
 package com.example.mobileclient.presentation.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,7 +9,8 @@ import com.example.mobileclient.R
 import com.example.mobileclient.databinding.ItemImagePagerViewBinding
 
 class ImageViewInformationFormPagerAdapter(
-    private val imageUrls: List<String?>
+    private val imageUrls: List<String?>,
+    private val context: Context
 ) : RecyclerView.Adapter<ImageViewInformationFormPagerAdapter.PagerVH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PagerVH {
@@ -21,7 +23,7 @@ class ImageViewInformationFormPagerAdapter(
 
     override fun onBindViewHolder(holder: PagerVH, position: Int) {
         with(holder.binding) {
-            Glide.with(image.context)
+            Glide.with(context)
                 .load(imageUrls[position])
                 .placeholder(R.drawable.ic_baseline_image_24)
                 .error(R.drawable.ic_baseline_broken_image_24)

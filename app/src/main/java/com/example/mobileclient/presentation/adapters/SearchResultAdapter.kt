@@ -1,5 +1,6 @@
 package com.example.mobileclient.presentation.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +18,8 @@ import com.example.mobileclient.databinding.ItemShopBinding
 class SearchResultAdapter(
     private val campaigns: List<CampaignsItem?>?,
     private val products: List<ProductsItem?>?,
-    private val listener: ListenerItem
+    private val listener: ListenerItem,
+    private val context: Context
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
 
     private var currentPositionCompany: Int = 0
@@ -107,7 +109,7 @@ class SearchResultAdapter(
     }
 
     private fun loadImage(url: String?, image: ImageView) {
-        Glide.with(image.context)
+        Glide.with(context)
             .load(url)
             .placeholder(R.drawable.ic_baseline_image_24)
             .error(R.drawable.ic_baseline_broken_image_24)

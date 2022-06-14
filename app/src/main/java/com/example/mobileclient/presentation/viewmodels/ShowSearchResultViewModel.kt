@@ -5,7 +5,7 @@ import com.example.mobileclient.data.storage.models.CampaignsItem
 import com.example.mobileclient.data.storage.models.ProductsItem
 import com.example.mobileclient.presentation.adapters.SearchResultAdapter
 
-class SearchResultViewModel(
+class ShowSearchResultViewModel(
 ): BaseViewModel(), SearchResultAdapter.ListenerItem {
 
     val displayProduct = MutableLiveData<ProductsItem>()

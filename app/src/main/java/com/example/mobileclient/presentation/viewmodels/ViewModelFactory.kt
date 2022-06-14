@@ -34,7 +34,7 @@ class ModelFactory() : ViewModelProvider.NewInstanceFactory() {
                 loginPhoneUseCase
             ) as T
             AuthorizationViewModel::class.java -> AuthorizationViewModel(loginPhoneUseCase) as T
-            SearchResultViewModel::class.java -> SearchResultViewModel() as T
+            ShowSearchResultViewModel::class.java -> ShowSearchResultViewModel() as T
             InformationAboutElementViewModel::class.java -> InformationAboutElementViewModel() as T
             SearchViewModel::class.java -> SearchViewModel(searchByStringUseCase) as T
             else -> {

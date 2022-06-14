@@ -24,6 +24,7 @@ class ConfirmationPhoneFragment : BaseFragment(), HasCustomActionToolbar {
     private lateinit var viewModel: ConfirmationPhoneViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setRetainInstance(true)
         super.onCreate(savedInstanceState)
         binding = FragmentConfirmationPhoneBinding.inflate(layoutInflater)
         viewModel = activity?.let {

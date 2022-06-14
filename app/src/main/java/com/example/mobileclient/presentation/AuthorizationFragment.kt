@@ -25,6 +25,7 @@ class AuthorizationFragment : BaseFragment(), HasCustomActionToolbar {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setRetainInstance(true)
         binding = FragmentAuthorizationBinding.inflate(layoutInflater)
         viewModel = activity?.let {
             ViewModelProvider(

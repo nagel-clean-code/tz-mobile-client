@@ -25,6 +25,7 @@ class SearchFragment : BaseFragment(), HasCustomActionToolbar {
     private lateinit var resultAuthorization: LoginStep2Model
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setRetainInstance(true)
         super.onCreate(savedInstanceState)
         binding = FragmentSearchBinding.inflate(layoutInflater)
         viewModel = activity?.let {

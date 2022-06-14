@@ -17,23 +17,24 @@ import com.example.mobileclient.presentation.contract.CustomAction
 import com.example.mobileclient.presentation.contract.HasCustomActionToolbar
 import com.example.mobileclient.presentation.contract.navigator
 import com.example.mobileclient.presentation.viewmodels.ModelFactory
-import com.example.mobileclient.presentation.viewmodels.SearchResultViewModel
+import com.example.mobileclient.presentation.viewmodels.ShowSearchResultViewModel
 
-class SearchResultFragment : BaseFragment(), HasCustomActionToolbar {
+class ShowSearchResultFragment : BaseFragment(), HasCustomActionToolbar {
 
     private lateinit var binding: FragmentSearchResultBinding
-    private lateinit var viewModel: SearchResultViewModel
+    private lateinit var viewModelShow: ShowSearchResultViewModel
     private lateinit var responseSearch: ResponseSearch
     private var searchAdapter: SearchResultAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setRetainInstance(true)
         binding = FragmentSearchResultBinding.inflate(layoutInflater)
-        viewModel = activity?.let {
+        viewModelShow = activity?.let {
             ViewModelProvider(
                 it,
                 ModelFactory()
-            )[SearchResultViewModel::class.java]
+            )[ShowSearchResultViewModel::class.java]
         }!!
     }
 
@@ -42,7 +43,7 @@ class SearchResultFragment : BaseFragment(), HasCustomActionToolbar {
         savedInstanceState: Bundle?
     ): View? {
         responseSearch = arguments?.get(RESPONSE_SEARCH) as ResponseSearch
-        if (searchAdapter == null) {
+        if (savedInstanceState == null && searchAdapter == null) {
             showResult()
         }
         setupListenerSelectedItem()
@@ -50,24 +51,24 @@ class SearchResultFragment : BaseFragment(), HasCustomActionToolbar {
     }
 
     private fun setupListenerSelectedItem() {
-        viewModel.displayCampaign.observe(viewLifecycleOwner) {
+        viewModelShow.displayCampaign.observe(viewLifecycleOwner) {
             if (it != null) {
                 displayCampaign(it)
-                viewModel.displayCampaign.postValue(null)
+                viewModelShow.displayCampaign.postValue(null)
             }
         }
-        viewModel.displayProduct.observe(viewLifecycleOwner) {
+        viewModelShow.displayProduct.observe(viewLifecycleOwner) {
             if (it != null) {
                 displayProduct(it)
-                viewModel.displayProduct.postValue(null)
+                viewModelShow.displayProduct.postValue(null)
             }
         }
     }
 
     override fun onPause() {
         super.onPause()
-        viewModel.displayCampaign.removeObservers(viewLifecycleOwner)
-        viewModel.displayProduct.removeObservers(viewLifecycleOwner)
+        viewModelShow.displayCampaign.removeObservers(viewLifecycleOwner)
+        viewModelShow.displayProduct.removeObservers(viewLifecycleOwner)
     }
 
     private fun displayCampaign(campaignsItem: CampaignsItem) =
@@ -79,12 +80,12 @@ class SearchResultFragment : BaseFragment(), HasCustomActionToolbar {
     private fun showResult() {
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         searchAdapter =
-            SearchResultAdapter(responseSearch.campaigns, responseSearch.products, viewModel)
+            SearchResultAdapter(responseSearch.campaigns, responseSearch.products, viewModelShow, requireActivity().applicationContext)
         binding.recyclerView.adapter = searchAdapter
     }
 
     companion object {
-        fun getNewInstance(responseSearch: ResponseSearch) = SearchResultFragment().apply {
+        fun getNewInstance(responseSearch: ResponseSearch) = ShowSearchResultFragment().apply {
             arguments = Bundle().apply {
                 putParcelable(RESPONSE_SEARCH, responseSearch)
             }

@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity(), Navigator {
         supportFragmentManager.registerFragmentLifecycleCallbacks(fragmentListener, false)
         if (savedInstanceState == null) {
 //            showFragmentLogin()   //TODO Для теста можно закоментить
-            showFragmentSearch(LoginStep2Model())
+            showFragmentSearch(LoginStep2Model()) //TODO использовать для теста
         }
         initActionBarToolbar()
         setupListenerResult()
@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity(), Navigator {
     }
 
     override fun showFragmentSearchResult(responseSearch: ResponseSearch) =
-        launchFragment(SearchResultFragment.getNewInstance(responseSearch))
+        launchFragment(ShowSearchResultFragment.getNewInstance(responseSearch))
 
     override fun showFragmentSearch(loginStep2Model: LoginStep2Model) =
         launchFragment(SearchFragment.getNewInstance(loginStep2Model))

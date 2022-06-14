@@ -34,6 +34,7 @@ class InformationAboutElementFragment : Fragment(), HasCustomActionToolbar {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setRetainInstance(true)
         binding = FragmentInformationAboutElementBinding.inflate(layoutInflater)
         viewModel = activity?.let {
             ViewModelProvider(
@@ -119,7 +120,7 @@ class InformationAboutElementFragment : Fragment(), HasCustomActionToolbar {
 
     private fun viewCompany() {
         binding.pagerPlaceholderImageView1.adapter =
-            ImageViewInformationFormPagerAdapter(listOf(campaignsItem?.imageUrl))
+            ImageViewInformationFormPagerAdapter(listOf(campaignsItem?.imageUrl), requireActivity().applicationContext)
         binding.tabLayout.visibility = View.GONE
         with(binding) {
             descriptionTextView.text = campaignsItem!!.name
@@ -133,13 +134,13 @@ class InformationAboutElementFragment : Fragment(), HasCustomActionToolbar {
 
     private fun viewProduct() {
         binding.pagerPlaceholderImageView1.adapter =
-            productsItem!!.imageUrls?.let { ImageViewInformationFormPagerAdapter(it) }
+            productsItem!!.imageUrls?.let { ImageViewInformationFormPagerAdapter(it,requireActivity().applicationContext) }
         TabLayoutMediator(binding.tabLayout, binding.pagerPlaceholderImageView1) { tab, position ->
             //Some implementation
         }.attach()
         with(binding) {
             descriptionTextView.text = productsItem!!.name
-            Glide.with(imageCompanyView.context)
+            Glide.with(requireActivity().applicationContext)
                 .load(productsItem!!.campaignImageUrl)
                 .placeholder(R.drawable.ic_baseline_image_24)
                 .error(R.drawable.ic_baseline_broken_image_24)
