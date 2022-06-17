@@ -30,7 +30,7 @@ class ConfirmationPhoneFragment : BaseFragment(), HasCustomActionToolbar {
         viewModel = activity?.let {
             ViewModelProvider(
                 it,
-                ModelFactory()
+                ModelFactory(requireContext())
             )[ConfirmationPhoneViewModel::class.java]
         }!!
     }

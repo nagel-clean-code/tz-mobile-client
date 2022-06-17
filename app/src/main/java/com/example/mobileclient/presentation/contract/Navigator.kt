@@ -1,8 +1,6 @@
 package com.example.mobileclient.presentation.contract
 
-import android.os.Parcelable
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LifecycleOwner
 import com.example.mobileclient.data.storage.models.CampaignsItem
 import com.example.mobileclient.data.storage.models.LoginStep2Model
 import com.example.mobileclient.data.storage.models.ProductsItem

@@ -31,7 +31,7 @@ class SearchFragment : BaseFragment(), HasCustomActionToolbar {
         viewModel = activity?.let {
             ViewModelProvider(
                 it,
-                ModelFactory()
+                ModelFactory(requireContext())
             )[SearchViewModel::class.java]
         }!!
     }

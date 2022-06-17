@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.ViewModelProvider
 import com.example.mobileclient.Constants
 import com.example.mobileclient.Constants.Companion.TYPE_ICON_CLOSE
 import com.example.mobileclient.Constants.Companion.TYPE_ICON_DEFAULT
@@ -16,13 +17,16 @@ import com.example.mobileclient.databinding.ActivityMainBinding
 import com.example.mobileclient.presentation.contract.CustomAction
 import com.example.mobileclient.presentation.contract.HasCustomActionToolbar
 import com.example.mobileclient.presentation.contract.Navigator
+import com.example.mobileclient.presentation.viewmodels.MainViewModel
+import com.example.mobileclient.presentation.viewmodels.ModelFactory
+import com.example.mobileclient.presentation.viewmodels.SearchViewModel
 
 class MainActivity : AppCompatActivity(), Navigator {
     private lateinit var binding: ActivityMainBinding
     private var mActionBarToolbar: Toolbar? = null
     private val currentFragment: Fragment
         get() = supportFragmentManager.findFragmentById(R.id.fragment_container)!!
-
+    private lateinit var viewModel: MainViewModel
     private val fragmentListener = object : FragmentManager.FragmentLifecycleCallbacks() {
         override fun onFragmentViewCreated(
             fm: FragmentManager,
@@ -37,11 +41,17 @@ class MainActivity : AppCompatActivity(), Navigator {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel = ViewModelProvider(this, ModelFactory(this))[MainViewModel::class.java]
+
         binding = ActivityMainBinding.inflate(layoutInflater).also { setContentView(it.root) }
         supportFragmentManager.registerFragmentLifecycleCallbacks(fragmentListener, false)
         if (savedInstanceState == null) {
-            showFragmentLogin()   //TODO Для теста можно закоментить
-//            showFragmentSearch(LoginStep2Model()) //TODO использовать для теста
+            val session = viewModel.getSession()
+            if (session == null) {
+                showFragmentLogin()
+            } else {
+                showFragmentSearch(session)
+            }
         }
         initActionBarToolbar()
         setupListenerResult()
@@ -68,8 +78,13 @@ class MainActivity : AppCompatActivity(), Navigator {
         ) { _, bundle ->
             val modelResult: LoginStep2Model =
                 bundle.get(Constants.LOGIN_STEP_2_MODEL) as LoginStep2Model
+            saveSession(modelResult)
             showFragmentSearch(modelResult)
         }
+    }
+
+    private fun saveSession(loginStep2Model: LoginStep2Model) {
+        viewModel.saveSession(loginStep2Model)
     }
 
     override fun showFragmentSearchResult(responseSearch: ResponseSearch) =

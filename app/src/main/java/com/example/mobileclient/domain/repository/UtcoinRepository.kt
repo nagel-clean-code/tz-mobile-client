@@ -8,4 +8,6 @@ interface UtcoinRepository {
     suspend fun loginPhone(numberPhone: String): LoginStep1Model
     suspend fun confirmCode(numberPhone: String, code: String): LoginStep2Model
     suspend fun search(str: String): ResponseSearch
+    fun saveSession(loginStep2Model: LoginStep2Model)
+    fun getSession(): LoginStep2Model?
 }

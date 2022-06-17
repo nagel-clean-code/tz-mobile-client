@@ -39,7 +39,7 @@ class InformationAboutElementFragment : Fragment(), HasCustomActionToolbar {
         viewModel = activity?.let {
             ViewModelProvider(
                 it,
-                ModelFactory()
+                ModelFactory(requireContext())
             )[InformationAboutElementViewModel::class.java]
         }!!
     }
@@ -128,7 +128,13 @@ class InformationAboutElementFragment : Fragment(), HasCustomActionToolbar {
             priceTextView.visibility = View.GONE
             cashbackTextView1.text = campaignsItem!!.cashback
             timeCashbackAccrualTextView1.text = campaignsItem!!.paymentTime
-            conditionsTextView1.text = campaignsItem!!.actions?.get(0)?.text ?: ""
+            if(campaignsItem!!.actions != null && campaignsItem!!.actions!!.isNotEmpty()){
+                conditionsTextView1.text = campaignsItem!!.actions?.get(0)?.text ?: ""
+            }else{
+                conditionsHeadTextView.visibility = View.GONE
+                relative.visibility = View.GONE
+                expandButton.visibility = View.GONE
+            }
         }
     }
 

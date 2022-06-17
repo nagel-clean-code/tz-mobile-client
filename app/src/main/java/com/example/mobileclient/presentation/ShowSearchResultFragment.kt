@@ -33,7 +33,7 @@ class ShowSearchResultFragment : BaseFragment(), HasCustomActionToolbar {
         viewModelShow = activity?.let {
             ViewModelProvider(
                 it,
-                ModelFactory()
+                ModelFactory(requireContext())
             )[ShowSearchResultViewModel::class.java]
         }!!
     }

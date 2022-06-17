@@ -30,7 +30,7 @@ class AuthorizationFragment : BaseFragment(), HasCustomActionToolbar {
         viewModel = activity?.let {
             ViewModelProvider(
                 it,
-                ModelFactory()
+                ModelFactory(requireContext())
             )[AuthorizationViewModel::class.java]
         }!!
     }
